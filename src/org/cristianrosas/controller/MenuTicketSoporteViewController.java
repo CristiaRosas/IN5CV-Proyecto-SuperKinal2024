@@ -101,7 +101,7 @@ public class MenuTicketSoporteViewController implements Initializable {
         TicketSoporte ts = (TicketSoporte)tblTickets.getSelectionModel().getSelectedItem();
         if(ts != null){
             tfTicketId.setText(Integer.toString(ts.getTicketSoporte()));
-            taDescripcion.setText(ts.getDescripcionTocket());
+            taDescripcion.setText(ts.getDescripcionTicket());
             cmbEstatus.getSelectionModel().select(0);
             cmbClientes.getSelectionModel().select(obtenerIndexCliente());         
         }

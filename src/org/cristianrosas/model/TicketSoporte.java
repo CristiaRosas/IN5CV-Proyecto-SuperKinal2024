@@ -11,7 +11,7 @@ package org.cristianrosas.model;
  */
 public class TicketSoporte {
     private int TicketSoporte;
-    private String descripcionTocket;
+    private String descripcionTicket;
     private String estatus;
     private String cliente;
     private int clienteId;
@@ -21,9 +21,9 @@ public class TicketSoporte {
         
     }
 
-    public TicketSoporte(int TicketSoporte, String descripcionTocket, String estatus, String cliente, int facturaId) {
+    public TicketSoporte(int TicketSoporte, String descripcionTicket, String estatus, String cliente, int facturaId) {
         this.TicketSoporte = TicketSoporte;
-        this.descripcionTocket = descripcionTocket;
+        this.descripcionTicket = descripcionTicket;
         this.estatus = estatus;
         this.cliente = cliente;
         this.facturaId = facturaId;
@@ -31,7 +31,7 @@ public class TicketSoporte {
 
     public TicketSoporte(int TicketSoporte, String descripcionTocket, String estatus, int clienteId, int facturaId) {
         this.TicketSoporte = TicketSoporte;
-        this.descripcionTocket = descripcionTocket;
+        this.descripcionTicket = descripcionTocket;
         this.estatus = estatus;
         this.clienteId = clienteId;
         this.facturaId = facturaId;
@@ -45,12 +45,12 @@ public class TicketSoporte {
         this.TicketSoporte = TicketSoporte;
     }
 
-    public String getDescripcionTocket() {
-        return descripcionTocket;
+    public String getDescripcionTicket() {
+        return descripcionTicket;
     }
 
-    public void setDescripcionTocket(String descripcionTocket) {
-        this.descripcionTocket = descripcionTocket;
+    public void setDescripcionTicket(String descripcionTocket) {
+        this.descripcionTicket = descripcionTocket;
     }
 
     public String getEstatus() {
@@ -87,7 +87,7 @@ public class TicketSoporte {
 
     @Override
     public String toString() {
-        return "TicketSoporte{" + "TicketSoporte=" + TicketSoporte + ", descripcionTocket=" + descripcionTocket + ", estatus=" + estatus + ", cliente=" + cliente + ", clienteId=" + clienteId + ", facturaId=" + facturaId + '}';
+        return "TicketSoporte{" + "TicketSoporte=" + TicketSoporte + ", descripcionTicket=" + descripcionTicket + ", estatus=" + estatus + ", cliente=" + cliente + ", clienteId=" + clienteId + ", facturaId=" + facturaId + '}';
     }
     
 }

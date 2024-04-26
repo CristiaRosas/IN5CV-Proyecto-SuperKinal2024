@@ -17,7 +17,7 @@
             <Image url="@../image/FondoMenuTicketSoporte.png" />
          </image>
       </ImageView>
-      <TextField fx:id="taDescripcion" editable="false" layoutX="26.0" layoutY="224.0" prefHeight="42.0" prefWidth="290.0" promptText="Ticket Id" />
+      <TextField fx:id="tfTicketId" editable="false" layoutX="26.0" layoutY="224.0" prefHeight="42.0" prefWidth="290.0" promptText="Ticket Id" />
       <TextArea fx:id="taDescripcion" layoutX="32.0" layoutY="394.0" prefHeight="116.0" prefWidth="364.0" wrapText="true" />
       <ComboBox fx:id="cmbFacturas" layoutX="765.0" layoutY="224.0" prefHeight="42.0" prefWidth="355.0" />
       <ComboBox fx:id="cmbClientes" layoutX="365.0" layoutY="224.0" prefHeight="42.0" prefWidth="355.0" />

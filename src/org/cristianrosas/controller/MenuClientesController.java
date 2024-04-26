@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import org.cristianrosas.system.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -26,6 +27,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.cristianrosas.dao.Conexion;
 import org.cristianrosas.dto.ClienteDTO;
 import org.cristianrosas.model.Cliente;
+import org.cristianrosas.utils.SuperKinalAlert;
  
 /**
 * FXML Controller class
@@ -66,10 +68,12 @@ public class MenuClientesController implements Initializable {
             stage.formClientesView(2);
         }else if(event.getSource() == btnRegresar){
             stage.menuPrincipalView();
-        }else if(event.getSource() == btnEliminar){
-            int cliId = ((Cliente)tblClientes.getSelectionModel().getSelectedItem()).getClienteId();
-            eliminarCliente(cliId);
-            cargarLista();
+        } else if(event.getSource() == btnEliminar){
+            if(SuperKinalAlert.getInstance().mostrarAlertaConfirmacion(405).get() == ButtonType.OK){
+                int cliId = ((Cliente)tblClientes.getSelectionModel().getSelectedItem()).getClienteId();
+                eliminarCliente(cliId);
+                cargarLista();
+            }
         }else if(event.getSource() == btnBuscar){
             tblClientes.getItems().clear();
             if(tfClienteId.getText().equals("")){
@@ -98,7 +102,7 @@ public class MenuClientesController implements Initializable {
         ArrayList<Cliente> clientes = new ArrayList<>();
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_listarClientes";
+            String sql = "call sp_listarCliente() ";
             statement = conexion.prepareStatement(sql);
             resultSet = statement.executeQuery();
             while(resultSet.next()){
@@ -132,7 +136,7 @@ public class MenuClientesController implements Initializable {
     public void eliminarCliente(int cliId){
         try{
                 conexion = Conexion.getInstance().obtenerConexion();
-                String sql = "call sp_eliminarClientes(?)";
+                String sql = "call sp_eliminarCliente(?)";
                 statement = conexion.prepareStatement(sql);
                 statement.setInt(1, cliId);
                 statement.execute();
@@ -155,7 +159,7 @@ public class MenuClientesController implements Initializable {
         Cliente cliente = null;
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_buscarClientes(?)";
+            String sql = "call sp_buscarCliente(?)";
             statement = conexion.prepareStatement(sql);
             statement.setInt(1, Integer.parseInt(tfClienteId.getText()));
             resultSet = statement.executeQuery();

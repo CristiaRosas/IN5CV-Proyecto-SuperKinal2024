@@ -73,7 +73,7 @@ public class Main extends Application {
             MenuClientesController menuClientesView = (MenuClientesController)switchScene("MenuClienteView.fxml", 1200, 750);
             menuClientesView.setStage(this);
         }catch(Exception e){
-            System.out.println("e.getMessage()");
+            System.out.println(e.getMessage());
         }
     }
     
@@ -89,10 +89,10 @@ public class Main extends Application {
     
     public void menuTicketSoporteView(){
         try{
-            MenuTicketSoporteViewController menuTicketSoporteView = (MenuTicketSoporteViewController) switchScene("MenuTicketSoporteView.fxml", 1285, 750);
+            MenuTicketSoporteViewController menuTicketSoporteView = (MenuTicketSoporteViewController) switchScene("MenuTicketSoporteView.fxml", 1300, 750);
             menuTicketSoporteView.setStage(this);
         }catch(Exception e){
-            System.out.println("e.getMessage()");
+            System.out.println(e.getMessage());
         }
     }
 
