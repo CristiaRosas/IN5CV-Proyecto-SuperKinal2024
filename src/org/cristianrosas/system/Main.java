@@ -17,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import org.cristianrosas.controller.FormClientesController;
 import org.cristianrosas.controller.MenuClientesController;
 import org.cristianrosas.controller.MenuPrincipalController;
+import org.cristianrosas.controller.MenuProductosController;
 import org.cristianrosas.controller.MenuTicketSoporteViewController;
 
 
@@ -91,6 +92,14 @@ public class Main extends Application {
         try{
             MenuTicketSoporteViewController menuTicketSoporteView = (MenuTicketSoporteViewController) switchScene("MenuTicketSoporteView.fxml", 1300, 750);
             menuTicketSoporteView.setStage(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void menuProductosView(){
+        try{
+            MenuProductosController menuProductosView = (MenuProductosController) switchScene("MenuProductosView.fxml", 1200, 750);
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
