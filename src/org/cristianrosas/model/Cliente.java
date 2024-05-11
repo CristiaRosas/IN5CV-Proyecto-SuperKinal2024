@@ -11,22 +11,22 @@ package org.cristianrosas.model;
  */
 public class Cliente {
     private int clienteId;
-    private String  nombre;
+    private String nombre;
     private String apellido;
     private String telefono;
     private String direccion;
-    private String nit;
+    private String NIT;
 
     public Cliente() {
     }
 
-    public Cliente(int clienteId, String nombre, String apellido, String telefono, String direccion, String nit) {
+    public Cliente(int clienteId, String nombre, String apellido, String telefono, String direccion, String NIT) {
         this.clienteId = clienteId;
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
         this.direccion = direccion;
-        this.nit = nit;
+        this.NIT = NIT;
     }
 
     public int getClienteId() {
@@ -69,20 +69,22 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public String getNit() {
-        return nit;
+    public String getNIT() {
+        return NIT;
     }
 
-    public void setNit(String nit) {
-        this.nit = nit;
+    public void setNIT(String NIT) {
+        this.NIT = NIT;
     }
-    
-    
 
     @Override
     public String toString() {
-        return "id: " + clienteId + " | " + nombre + " " + apellido;
+        return "Id: " + clienteId + " - " + nombre + " " + apellido;
     }
+    
+    
+
+    
     
     
 }
