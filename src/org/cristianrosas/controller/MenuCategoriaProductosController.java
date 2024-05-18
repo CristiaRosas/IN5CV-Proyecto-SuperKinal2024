@@ -55,7 +55,7 @@ public class MenuCategoriaProductosController implements Initializable {
         ArrayList<CategoriaProducto> categoriaProductos = new ArrayList<>();
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_listarCategoriaProductos()";
+            String sql = "call sp_listarCategoriaProducto()";
             statement = conexion.prepareStatement(sql);
             resultset = statement.executeQuery();
             

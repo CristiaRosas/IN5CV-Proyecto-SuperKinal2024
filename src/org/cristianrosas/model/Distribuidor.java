@@ -7,7 +7,7 @@ package org.cristianrosas.model;
 
 /**
  *
- * @author Lenovo
+ * @author Joaki
  */
 public class Distribuidor {
     private int distribuidorId;

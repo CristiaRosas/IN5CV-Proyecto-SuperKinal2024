@@ -7,7 +7,7 @@ package org.cristianrosas.model;
 
 /**
  *
- * @author Lenovo
+ * @author informatica
  */
 public class CategoriaProducto {
     private int categoriaProductosId;

@@ -10,7 +10,7 @@ import java.time.LocalTime;
 
 /**
  *
- * @author Lenovo
+ * @author informatica
  */
 public class Factura {
     private int facturaId;

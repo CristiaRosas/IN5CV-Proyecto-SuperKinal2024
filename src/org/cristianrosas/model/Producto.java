@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 
 /**
  *
- * @author Lenovo
+ * @author Joaki
  */
 public class Producto {
     private int productoId;
