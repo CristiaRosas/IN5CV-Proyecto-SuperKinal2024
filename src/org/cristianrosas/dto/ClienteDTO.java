@@ -9,14 +9,13 @@ import org.cristianrosas.model.Cliente;
 
 /**
  *
- * @author informatica
+ * @author Lenovo
  */
 public class ClienteDTO {
     private static ClienteDTO instance;
     private Cliente cliente;
-    
-    private ClienteDTO(){
-        
+
+    public ClienteDTO() {
     }
     
     public static ClienteDTO getClienteDTO(){
@@ -24,7 +23,7 @@ public class ClienteDTO {
             instance = new ClienteDTO();
         }
         return instance;
-    }
+    } 
 
     public Cliente getCliente() {
         return cliente;
