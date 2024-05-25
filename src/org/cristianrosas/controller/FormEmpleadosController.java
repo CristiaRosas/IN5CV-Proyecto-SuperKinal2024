@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.cristianrosas.controller;
 
 import java.net.URL;
@@ -20,11 +15,6 @@ import org.cristianrosas.dto.EmpleadoDTO;
 import org.cristianrosas.model.Empleado;
 import org.cristianrosas.system.Main;
 
-/**
- * FXML Controller class
- *
- * @author Lenovo
- */
 public class FormEmpleadosController implements Initializable {
     private Main stage;    
     private int op;
@@ -36,18 +26,12 @@ public class FormEmpleadosController implements Initializable {
     
     @FXML
     Button btnAgregar, btnCancelar;
-    
 
-
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if(EmpleadoDTO.getEmpleadoDTO().getEmpleado() != null){
             cargarDatos(EmpleadoDTO.getEmpleadoDTO().getEmpleado());
         }
-        
     }    
     
     public void cargarDatos(Empleado empleado){
@@ -59,7 +43,6 @@ public class FormEmpleadosController implements Initializable {
         tfSalida.setText(empleado.getHoraSalida());
         tfCargo.setText(empleado.getCargo());
         tfEncargado.setText(empleado.getEncargado());
-
     }
     
     public Main getStage() {
@@ -98,7 +81,7 @@ public class FormEmpleadosController implements Initializable {
                     statement.close();
                 }
             }catch(SQLException e){
-                
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -132,9 +115,7 @@ public class FormEmpleadosController implements Initializable {
             }
         }
     }
-    
-    
-    
+
     @FXML
     public void handleButtonAction(ActionEvent event){
         if(event.getSource() == btnCancelar){
@@ -148,12 +129,12 @@ public class FormEmpleadosController implements Initializable {
                 editarEmpleado();
                 EmpleadoDTO.getEmpleadoDTO().setEmpleado(null);
                 stage.menuEmpleadosView();
+            }else if(op == 3){
+                agregarEmpleado();
+                stage.formUsuarioView();
             }
             
             stage.menuEmpleadosView();
         }
-      
     }
-        
-    
 }

@@ -54,14 +54,12 @@ create table Empleados(
 	constraint FK_Empleados_Cargos foreign key Cargos(cargoId)
 		references Cargos (cargoId)
 );
-
 create table CategoriaProductos(
-	categoriaProductoId int not null auto_increment,
+	categoriaProductosId int not null auto_increment,
     nombreCategoria varchar(30) not null,
     descripcionCategoria varchar(100) not null,
-    Primary key PK_categoriaProductoId(categoriaProductoId)
+    Primary key PK_categoriaProductosId(categoriaProductosId)
 );
-
 create table Productos(
 	productoId int not null auto_increment,
     nombreProducto varchar(50),
@@ -72,12 +70,12 @@ create table Productos(
     precioCompra decimal(10, 2) not null,
     imagenProducto blob,
     distribuidorId int not null,
-    categoriaProductoId int not null,
+    categoriaProductosId int not null,
     primary key PK_productoId(productoId),
     constraint FK_Productos_Distribuidores foreign key Distribuidores(distribuidorId)
 	references Distribuidores(distribuidorId),
-    constraint FK_Productos_CategoriaProductos foreign key CategoriaProductos(categoriaProductoId)
-		references CategoriaProductos (categoriaProductoId)
+    constraint FK_Productos_CategoriaProductos foreign key CategoriaProductos(categoriaProductosId)
+		references CategoriaProductos (categoriaProductosId)
 );
  
 create table DetalleCompras(
@@ -140,7 +138,28 @@ create table Promociones(
     constraint FK_Promociones_Productos foreign key Promociones(productoId)
 		references Productos (productoId)
 );
+
+-- ------------------------ Niveles Accesos -----------------------
+create table NivelesAcceso(
+	nivelAccesoId int not null auto_increment,
+    nivelAcceso varchar(40) not null,
+    primary key PK_nivelAccesoId(nivelAccesoId)
+);
+-- ---------------------------- Usuarios --------------------------
+create table Usuarios(
+	usuarioId int not null auto_increment,
+    usuario varchar(50) not null,
+    contrasenia varchar(100) not null,
+    nivelAccesoId int not null,
+    empleadoId int not null,
+    primary key PK_usuarioId(usuarioId),
+    constraint FK_Usuarios_NivelesAcceso foreign key Usuarios(nivelAccesoId)
+		references NivelesAcceso(nivelAccesoId),
+	constraint FK_Usuarios_Empleados foreign key Usuarios(empleadoId)
+		references Empleados(empleadoId)
+);
+
  
 insert into Clientes(nombre, apellido, telefono, direccion, nit, clienteId) values
-	('Rene', 'Rosas', '1111-1111', 'Petapa', '1234567-8', 1),
-    ('Jorge', 'Peralta', '2222-2222', 'Amatitlan', '7894561-2', 2);
+	('Jorge', 'Peralta', '2154-9768', 'Peten', '5083593-9', 1),
+    ('Carlos', 'Pacheco', '3164-8527', 'Villa canales', 'CF', 2);

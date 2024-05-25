@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.cristianrosas.model;
 
-/**
- *
- * @author informatica
- */
 public class CategoriaProducto {
     private int categoriaProductosId;
     private String nombreCategoria;
@@ -49,8 +40,6 @@ public class CategoriaProducto {
 
     @Override
     public String toString() {
-        return "CategoriaProductos{" + "categoriaProductosId=" + categoriaProductosId + ", nombreCategoria=" + nombreCategoria + ", descripcionCategoria=" + descripcionCategoria + '}';
+        return "ID: " + categoriaProductosId + " - " + nombreCategoria;
     }
-    
-    
 }

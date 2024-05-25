@@ -32,6 +32,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.cristianrosas.controller.FormCargosController;
+import org.cristianrosas.controller.FormUsuarioController;
+import org.cristianrosas.controller.LoginController;
 
 
 
@@ -52,6 +54,10 @@ public class Main extends Application {
         stage.getIcons().add(icon);
         stage.setTitle("Super Kinal");
         menuPrincipalView();
+         // formUsuarioView();   // Ambas funciones me presentan errores profe
+         //  loginView();
+        
+           
         stage.show();
     }
     
@@ -120,6 +126,16 @@ public class Main extends Application {
             menuCargosView.setStage(this);
         }catch(Exception e){
             System.out.println(e.getMessage());
+        }
+    }
+    
+    public void formCargosView(){
+        try{
+            FormCargosController formCargosView = (FormCargosController)switchScene("FormCargosView.fxml", 500, 700);
+            formCargosView.setStage(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            
         }
     }
     
@@ -246,13 +262,21 @@ public class Main extends Application {
         }
     }
     
-    public void formCargosView(){
+    public void loginView(){
         try{
-            FormCargosController formCargosView = (FormCargosController)switchScene("FormCargosView.fxml", 500, 700);
-            formCargosView.setStage(this);
+            LoginController loginView = (LoginController) switchScene("LoginView.fxml", 500, 700);
+            loginView.setStage(this);
         }catch(Exception e){
             System.out.println(e.getMessage());
-            
+        }
+    }
+    
+    public void formUsuarioView(){
+        try{
+            FormUsuarioController formUsuarioView = (FormUsuarioController) switchScene("FormUsuarioView.fxml", 500, 700);
+            formUsuarioView.setStage(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
         }
     }
    

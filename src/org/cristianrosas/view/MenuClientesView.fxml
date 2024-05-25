@@ -58,7 +58,7 @@
                </font></Button>
          </children>
       </GridPane>
-      <Button fx:id="btnRegresar" layoutX="1006.0" layoutY="582.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="54.0" prefWidth="103.0" style="-fx-background-color: green;" text="Regresar" textFill="WHITE">
+      <Button fx:id="btnRegresar" layoutX="1012.0" layoutY="585.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="54.0" prefWidth="92.0" style="-fx-background-color: green;" text="Regresar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>

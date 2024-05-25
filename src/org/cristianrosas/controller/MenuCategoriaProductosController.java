@@ -98,7 +98,7 @@ public class MenuCategoriaProductosController implements Initializable {
     public void eliminarCategoriaProducto(int catProId){
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_eliminarCategoriaProductos(?)";
+            String sql = "call sp_eliminarCategoriaProducto(?)";
             statement = conexion.prepareStatement(sql);
             statement.setInt(1, catProId);
             statement.execute();
@@ -122,7 +122,7 @@ public class MenuCategoriaProductosController implements Initializable {
         CategoriaProducto categoriaProducto = null;
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_buscarCategoriaProductos(?)";
+            String sql = "call sp_buscarCategoriaProducto(?)";
             statement = conexion.prepareStatement(sql);
             statement.setInt(1 ,Integer.parseInt(tfCategoriaProductoId.getText()));
             resultset = statement.executeQuery();

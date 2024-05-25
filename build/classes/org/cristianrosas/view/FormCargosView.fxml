@@ -18,7 +18,7 @@
       <TextField fx:id="tfCargoId" editable="false" layoutX="24.0" layoutY="151.0" prefHeight="32.0" prefWidth="185.0" promptText="cargo Id" />
       <TextField fx:id="tfNombreCargo" layoutX="23.0" layoutY="272.0" prefHeight="32.0" prefWidth="231.0" />
       <TextArea fx:id="taDescripcion" layoutX="72.0" layoutY="492.0" prefHeight="154.0" prefWidth="251.0" wrapText="true" />
-      <Button fx:id="btnAgregar" layoutX="390.0" layoutY="440.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="70.0" prefWidth="80.0" style="-fx-background-color: green;" text="Agregar" textFill="#f8f8f8">
+      <Button fx:id="btnAgregar" layoutX="390.0" layoutY="440.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="70.0" prefWidth="80.0" style="-fx-background-color: green;" text="Aceptar" textFill="#f8f8f8">
          <font>
             <Font size="14.0" />
          </font></Button>

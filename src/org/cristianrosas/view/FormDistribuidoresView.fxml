@@ -15,11 +15,11 @@
          </image>
       </ImageView>
       <TextField fx:id="tfDistribuidorId" editable="false" layoutX="28.0" layoutY="118.0" prefHeight="35.0" prefWidth="222.0" promptText="Id del distribuidor" />
-      <TextField fx:id="tfNombre" layoutX="27.0" layoutY="198.0" prefHeight="35.0" prefWidth="222.0" />
-      <TextField fx:id="tfDireccion" layoutX="27.0" layoutY="281.0" prefHeight="35.0" prefWidth="222.0" />
-      <TextField fx:id="tfNIT" layoutX="27.0" layoutY="549.0" prefHeight="35.0" prefWidth="222.0" />
-      <TextField fx:id="tfTelefono" layoutX="27.0" layoutY="367.0" prefHeight="35.0" prefWidth="222.0" />
-      <TextField fx:id="tfWeb" layoutX="27.0" layoutY="456.0" prefHeight="35.0" prefWidth="222.0" />
+      <TextField fx:id="tfNombre" layoutX="27.0" layoutY="208.0" prefHeight="35.0" prefWidth="222.0" />
+      <TextField fx:id="tfDireccion" layoutX="27.0" layoutY="294.0" prefHeight="35.0" prefWidth="222.0" />
+      <TextField fx:id="tfNIT" layoutX="27.0" layoutY="578.0" prefHeight="35.0" prefWidth="222.0" />
+      <TextField fx:id="tfTelefono" layoutX="27.0" layoutY="384.0" prefHeight="35.0" prefWidth="222.0" />
+      <TextField fx:id="tfWeb" layoutX="27.0" layoutY="470.0" prefHeight="35.0" prefWidth="222.0" />
       <Button fx:id="btnAgregar" layoutX="388.0" layoutY="312.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="90.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Agregar" textFill="WHITE">
          <font>
             <Font size="14.0" />
