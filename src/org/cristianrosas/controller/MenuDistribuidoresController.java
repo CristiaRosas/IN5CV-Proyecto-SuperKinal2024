@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -26,6 +27,7 @@ import org.cristianrosas.dao.Conexion;
 import org.cristianrosas.dto.DistribuidorDTO;
 import org.cristianrosas.model.Distribuidor;
 import org.cristianrosas.system.Main;
+import org.cristianrosas.utils.SuperKinalAlert;
 
 /**
  * FXML Controller class
@@ -57,7 +59,7 @@ public class MenuDistribuidoresController implements Initializable {
         ArrayList<Distribuidor> distribuidores = new ArrayList<>();
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_listarDistribuidor()";
+            String sql = "call sp_listarDistribuidores()";
             statement = conexion.prepareStatement(sql);
             resultset = statement.executeQuery();
             
@@ -197,9 +199,11 @@ public class MenuDistribuidoresController implements Initializable {
         }else if(event.getSource() == btnRegresar){
             stage.menuPrincipalView();
         }else if(event.getSource() == btnEliminar){
-            int dirId = ((Distribuidor)tblDistribuidores.getSelectionModel().getSelectedItem()).getDistribuidorId();
-            eliminarDistribuidor(dirId);
-            cargarLista();
+            if(SuperKinalAlert.getInstance().mostrarAlertaConfirmacion(405).get() == ButtonType.OK){
+                int dirId = ((Distribuidor)tblDistribuidores.getSelectionModel().getSelectedItem()).getDistribuidorId();
+                eliminarDistribuidor(dirId);
+                cargarLista();
+            }
         }else if (event.getSource() == btnBuscar){
             tblDistribuidores.getItems().clear();
             if(tfDistribuidorId.getText().equals("")){

@@ -1,7 +1,17 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.cristianrosas.model;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ *
+ * @author Lenovo
+ */
 public class Factura {
     private int facturaId;
     private LocalDate fecha;
@@ -24,14 +34,16 @@ public class Factura {
         this.empleadoId = empleadoId;
     }
 
-    public Factura(int facturaId,  LocalDate fecha, LocalTime hora, String cliente, String empleado, double total) {
+    public Factura(int facturaId,  LocalDate fecha, LocalTime hora, double total ,String cliente, String empleado) {
         this.facturaId = facturaId;
         this.fecha = fecha;
         this.hora = hora;
+        this.total = total;
         this.cliente = cliente;
         this.empleado = empleado;
-        this.total = total;
+ 
     }
+    
 
     public int getFacturaId() {
         return facturaId;
@@ -99,6 +111,7 @@ public class Factura {
 
     @Override
     public String toString() {
-        return "ID: " + facturaId + " - " + fecha + " - " + cliente + " - " + empleado;
+        return "ID: "+ facturaId + " - " + fecha + " - " + hora + " - " + total;
     }
+
 }

@@ -1,4 +1,8 @@
-
+ /*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.cristianrosas.controller;
 
 import java.net.URL;
@@ -28,9 +32,13 @@ import org.cristianrosas.model.Cliente;
 import org.cristianrosas.model.Factura;
 import org.cristianrosas.model.TicketSoporte;
 import org.cristianrosas.system.Main;
-import org.cristianrosas.utilis.SuperKinalAlert;
+import org.cristianrosas.utils.SuperKinalAlert;
 
-
+/**
+ * FXML Controller class
+ *
+ * @author Lenovo
+ */
 public class MenuTicketSoporteController implements Initializable {
     private Main stage;
     
@@ -195,7 +203,7 @@ public class MenuTicketSoporteController implements Initializable {
         ArrayList<Factura> facturas = new ArrayList<>();
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_listarFactura()";
+            String sql = "call sp_listarFacturas()";
             statement = conexion.prepareStatement(sql);
             resultset = statement.executeQuery();
             
@@ -203,12 +211,12 @@ public class MenuTicketSoporteController implements Initializable {
                 int facturaId = resultset.getInt("facturaId");
                 Date fecha = resultset.getDate("fecha");
                 Time hora = resultset.getTime("hora");
-                String cliente = resultset.getString("cliente");
-                String empleado = resultset.getString("empleado");
                 Double total = resultset.getDouble("total");
+                String cliente = resultset.getString("nombre");
+                String empleado = resultset.getString("nombreEmpleado");
 
                 
-                facturas.add(new Factura(facturaId, fecha.toLocalDate(), hora.toLocalTime(), cliente, empleado, total));
+                facturas.add(new Factura(facturaId, fecha.toLocalDate(), hora.toLocalTime(), total, cliente, empleado));
             }
         }catch(SQLException e){
             System.out.println(e.getMessage());

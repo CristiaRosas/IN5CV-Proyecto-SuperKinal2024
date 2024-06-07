@@ -1,5 +1,14 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.cristianrosas.model;
 
+/**
+ *
+ * @author Lenovo
+ */
 public class CategoriaProducto {
     private int categoriaProductosId;
     private String nombreCategoria;
@@ -42,4 +51,6 @@ public class CategoriaProducto {
     public String toString() {
         return "ID: " + categoriaProductosId + " - " + nombreCategoria;
     }
+    
+    
 }

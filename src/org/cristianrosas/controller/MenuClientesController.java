@@ -18,6 +18,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -26,6 +28,7 @@ import org.cristianrosas.dao.Conexion;
 import org.cristianrosas.dto.ClienteDTO;
 import org.cristianrosas.model.Cliente;
 import org.cristianrosas.system.Main;
+import org.cristianrosas.utils.SuperKinalAlert;
 
 /**
  * FXML Controller class
@@ -143,7 +146,7 @@ public class MenuClientesController implements Initializable {
                 String apellido = resultset.getString("apellido");
                 String telefono = resultset.getString("telefono");
                 String direccion = resultset.getString("direccion");
-                String NIT = resultset.getString("nit");
+                String NIT = resultset.getString("NIT");
                 
                 cliente = (new Cliente(clienteId, nombre, apellido, telefono, direccion, NIT));
             }
@@ -185,16 +188,18 @@ public class MenuClientesController implements Initializable {
     
     public void handleButtonAction(ActionEvent event){
         if(event.getSource() == btnAgregar){
-            stage.formClientesView(1);
+            stage.menuAgregarClientesView(1);
         }else if(event.getSource() == btnEditar){
             ClienteDTO.getClienteDTO().setCliente((Cliente)tblClientes.getSelectionModel().getSelectedItem());
-            stage.formClientesView(2);
+            stage.menuAgregarClientesView(2);
         }else if(event.getSource() == btnRegresar){
             stage.menuPrincipalView();
         }else if(event.getSource() == btnEliminar){
-            int cliId = ((Cliente)tblClientes.getSelectionModel().getSelectedItem()).getClienteId();
-            eliminarCliente(cliId);
-            cargarLista();
+            if(SuperKinalAlert.getInstance().mostrarAlertaConfirmacion(405).get() == ButtonType.OK){
+                int cliId = ((Cliente)tblClientes.getSelectionModel().getSelectedItem()).getClienteId();
+                eliminarCliente(cliId);
+                cargarLista();
+            }
         }else if (event.getSource() == btnBuscar){
             tblClientes.getItems().clear();
             if(tfClienteId.getText().equals("")){
@@ -206,7 +211,7 @@ public class MenuClientesController implements Initializable {
                 colApellido.setCellValueFactory(new PropertyValueFactory<Cliente, String>("apellido"));
                 colTelefono.setCellValueFactory(new PropertyValueFactory<Cliente, String>("telefono"));
                 colDireccion.setCellValueFactory(new PropertyValueFactory<Cliente, String>("direccion"));
-                colNIT.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nit"));
+                colNIT.setCellValueFactory(new PropertyValueFactory<Cliente, String>("NIT"));
             }
         }
     }   

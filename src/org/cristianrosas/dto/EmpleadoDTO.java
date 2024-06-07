@@ -9,7 +9,7 @@ import org.cristianrosas.model.Empleado;
 
 /**
  *
- * @author Lenovo
+ * @author Joaki
  */
 public class EmpleadoDTO {
     private static EmpleadoDTO instance;

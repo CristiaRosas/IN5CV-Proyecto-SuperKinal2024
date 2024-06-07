@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.cristianrosas.controller;
 
 import java.io.File;
@@ -18,6 +23,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -31,11 +37,15 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import org.cristianrosas.dao.Conexion;
 import org.cristianrosas.dto.ProductoDTO;
-import org.cristianrosas.model.CategoriaProducto;
-import org.cristianrosas.model.Distribuidor;
 import org.cristianrosas.model.Producto;
 import org.cristianrosas.system.Main;
+import org.cristianrosas.utils.SuperKinalAlert;
 
+/**
+ * FXML Controller class
+ *
+ * @author Lenovo
+ */
 public class MenuProductosController implements Initializable {
     
     private Main stage;
@@ -49,7 +59,7 @@ public class MenuProductosController implements Initializable {
     TableView tblProductos;
     
     @FXML
-    TextField tfNombre, tfStock, tfPUnitario, tfPMayor, tfPCompra, tfProductoId, tfBuscar;
+    TextField tfNombre, tfStock, tfPunitario, tfPMayor, tfPCompra, tfProductoId, tfBuscar;
     
     @FXML
     TextArea taDescripcion;
@@ -58,7 +68,7 @@ public class MenuProductosController implements Initializable {
     ComboBox cmbDistribuidor, cmbCategoria;
     
     @FXML
-    Button btnGuardar, btnEliminar, btnRegresar, btnBuscar;
+    Button btnAgregar, btnEliminar, btnRegresar, btnEditar, btnBuscar;
     
     
     @FXML
@@ -76,22 +86,22 @@ public class MenuProductosController implements Initializable {
         try{
             if(event.getSource() == btnRegresar){
             stage.menuPrincipalView();
-            }else if(event.getSource() == btnGuardar){
-                if(tfProductoId.getText().equals("")){
-                    agregarProductos();
-                }else{
-                    editarProductos();
-                }
+            }else if(event.getSource() == btnAgregar){
+                stage.formProductoView(1);
+            }else if(event.getSource() == btnEditar){
+                ProductoDTO.getProductoDTO().setProducto((Producto)tblProductos.getSelectionModel().getSelectedItem());
+                stage.formProductoView(2);
             }else if(event.getSource() == btnEliminar){
-                int proId = ((Producto)tblProductos.getSelectionModel().getSelectedItem()).getProductoId();
-                eliminarProducto(proId);
-                cargarDatos();
+                if(SuperKinalAlert.getInstance().mostrarAlertaConfirmacion(405).get() == ButtonType.OK){
+                    int proId = ((Producto)tblProductos.getSelectionModel().getSelectedItem()).getProductoId();
+                    eliminarProducto(proId);
+                    cargarDatos();
+                }
             }else if(event.getSource() == btnBuscar){
                 Producto producto = buscarProducto();
-                tblProductos.getItems().clear();
-                if(tfProductoId.getText().equals("")){
+                if(producto != null){
                     cargarDatos();
-                }else{
+                    tblProductos.getItems().clear();
                     lblNombre.setText(producto.getNombreProducto());
                     InputStream file = producto.getImagenProducto().getBinaryStream();
                     Image image = new Image(file);
@@ -104,8 +114,8 @@ public class MenuProductosController implements Initializable {
                     colPUnitario.setCellValueFactory(new PropertyValueFactory<Producto, Double>("precioVentaUnitario"));
                     colPMayor.setCellValueFactory(new PropertyValueFactory<Producto, Double>("precioVentaMayor"));
                     colPCompra.setCellValueFactory(new PropertyValueFactory<Producto, Double>("precioCompra"));
-                    colDistribuidor.setCellValueFactory(new PropertyValueFactory<Producto, String>("distribuidorId"));
-                    colCategoria.setCellValueFactory(new PropertyValueFactory<Producto, String>("categoriaProductosId"));
+                    colDistribuidor.setCellValueFactory(new PropertyValueFactory<Producto, String>("distribuidor"));
+                    colCategoria.setCellValueFactory(new PropertyValueFactory<Producto, String>("categoria"));
                 }
             }
             
@@ -171,10 +181,10 @@ public class MenuProductosController implements Initializable {
                 double precioVentaMayor = resultset.getDouble("precioVentaMayor");
                 double precioCompra = resultset.getDouble("precioCompra");
                 Blob imagenProducto = resultset.getBlob("imagenProducto");
-                String distribuidor = resultset.getString("nombreDistribuidor");
-                String categoriaProductoS = resultset.getString("nombreCategoria");
+                String distribuidor = resultset.getString("distribuidor");
+                String categoria = resultset.getString("categoria");
                 
-                productos.add(new Producto(productoId, nombre, descripcion, stock, precioVentaUnitario, precioVentaMayor, precioCompra, imagenProducto, distribuidor, categoriaProductoS));
+                productos.add(new Producto(productoId, nombre, descripcion, stock, precioVentaUnitario, precioVentaMayor, precioCompra, imagenProducto, distribuidor, categoria));
             }
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -233,72 +243,6 @@ public class MenuProductosController implements Initializable {
         return index;
     }    
     
-    public void agregarProductos(){
-        try{
-            conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_agregarProducto(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            statement = conexion.prepareStatement(sql);
-            statement.setString(1, tfNombre.getText());
-            statement.setString(2, taDescripcion.getText());
-            statement.setInt(3, Integer.parseInt(tfStock.getText()));
-            statement.setDouble(4, Double.parseDouble(tfPUnitario.getText()));
-            statement.setDouble(5, Double.parseDouble(tfPMayor.getText()));
-            statement.setDouble(6, Double.parseDouble(tfPCompra.getText()));
-            InputStream img = new FileInputStream(files.get(0));
-            statement.setBinaryStream(7, img);
-            statement.setInt(8, ((Distribuidor)cmbDistribuidor.getSelectionModel().getSelectedItem()).getDistribuidorId());
-            statement.setInt(9, ((CategoriaProducto)cmbCategoria.getSelectionModel().getSelectedItem()).getCategoriaProductosId());
-            statement.execute();
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }finally{
-            try{
-                if(statement != null){
-                    statement.close();
-                }
-                if(conexion != null){
-                    conexion.close();
-                }
-                               
-            }catch(SQLException e){
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-    
-    public void editarProductos(){
-        try{
-            conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_editarProducto(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            statement = conexion.prepareStatement(sql);
-            statement.setInt(1, Integer.parseInt(tfProductoId.getText()));
-            statement.setString(2, tfNombre.getText());
-            statement.setString(3, taDescripcion.getText());
-            statement.setInt(4, Integer.parseInt(tfStock.getText()));
-            statement.setDouble(5, Double.parseDouble(tfPUnitario.getText()));
-            statement.setDouble(6, Double.parseDouble(tfPMayor.getText()));
-            statement.setDouble(7, Double.parseDouble(tfPCompra.getText()));
-            InputStream img = new FileInputStream(files.get(0));
-            statement.setBinaryStream(8, img);
-            statement.setInt(9, ((Distribuidor)cmbDistribuidor.getSelectionModel().getSelectedItem()).getDistribuidorId());
-            statement.setInt(10, ((CategoriaProducto)cmbCategoria.getSelectionModel().getSelectedItem()).getCategoriaProductosId());
-            statement.execute();
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }finally{
-            try{
-                if(conexion != null){
-                conexion.close();
-                }
-                if(statement != null){
-                    statement.close();
-                }
-            }catch(SQLException e){
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-    
 
     
     public Producto buscarProducto(){
@@ -307,7 +251,7 @@ public class MenuProductosController implements Initializable {
             conexion = Conexion.getInstance().obtenerConexion();
             String sql = "call sp_buscarProducto(?)";
             statement = conexion.prepareStatement(sql);
-            statement.setInt(1, Integer.parseInt(tfProductoId.getText()));
+            statement.setInt(1, Integer.parseInt(tfBuscar.getText()));
             resultset = statement.executeQuery();
             if(resultset.next()){
                 int productoId = resultset.getInt("productoId");
@@ -317,10 +261,11 @@ public class MenuProductosController implements Initializable {
                 Double PVUnitario = resultset.getDouble("precioVentaUnitario");
                 Double PVMayor = resultset.getDouble("precioVentaMayor");
                 Double PCompra = resultset.getDouble("precioCompra");
-                String distribuidor = resultset.getString("nombreDistribuidor");
-                String categoria = resultset.getString("nombreCategoria");
+                Blob imagen = resultset.getBlob("imagenProducto");
+                String distribuidor = resultset.getString("distribuidor");
+                String categoria = resultset.getString("categoria");
                 
-                producto = new Producto(productoId, nombre, descripcion, stock, PVUnitario, PVMayor, PCompra, distribuidor, categoria);
+                producto = new Producto(productoId, nombre, descripcion, stock, PVUnitario, PVMayor, PCompra, imagen, distribuidor, categoria);
             }
         }catch(SQLException e){
             e.printStackTrace();
@@ -350,85 +295,16 @@ public class MenuProductosController implements Initializable {
             }
         }
     }
-    
-    public ObservableList<Distribuidor> listarDistribuidores(){
-        ArrayList<Distribuidor> distribuidores = new ArrayList<>();
-        try{
-            conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_listarDistribuidor()";
-            statement = conexion.prepareStatement(sql);
-            resultset = statement.executeQuery();
-            
-            while(resultset.next()){
-                int distribuidorId = resultset.getInt("distribuidorId");
-                String nombre = resultset.getString("nombreDistribuidor");
-                String direccion = resultset.getString("direccionDistribuidor");
-                String nit = resultset.getString("nitDistribuidor");
-                String telefono = resultset.getString("telefonoDistribuidor");
-                String web = resultset.getString("web");
-                
-                distribuidores.add(new Distribuidor(distribuidorId, nombre, direccion, nit, telefono, web));
-            }
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
-        }finally{
-            try{
-                if(resultset != null){
-                    resultset.close();
-                }
-                if(statement != null){
-                    statement.close();
-                }
-                if(conexion != null){
-                    conexion.close();
-                }
-            }catch(SQLException e){
-                System.out.println(e.getMessage());
-                
-            }
-        }
-        return FXCollections.observableList(distribuidores);
-    }
-    
-    public ObservableList<CategoriaProducto> listarCategoriaProductos(){
-        ArrayList<CategoriaProducto> categoriaProductos = new ArrayList<>();
-        try{
-            conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_listarCategoriaProducto()";
-            statement = conexion.prepareStatement(sql);
-            resultset = statement.executeQuery();
-            
-            while(resultset.next()){
-                int categoriaProductosId = resultset.getInt("categoriaProductosId");
-                String nombreCategoria = resultset.getString("nombreCategoria");
-                String descripcionCategoria = resultset.getString("descripcionCategoria");
-                categoriaProductos.add(new CategoriaProducto(categoriaProductosId, nombreCategoria, descripcionCategoria));
-            }
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
-        }finally{
-            try{
-                if(resultset != null){
-                    resultset.close();
-                }
-                if(statement != null){
-                    statement.close();
-                }
-                if(conexion != null){
-                    conexion.close();
-                }
-            }catch(SQLException e){
-                System.out.println(e.getMessage());
-                
-            }
-        }
-        return FXCollections.observableList(categoriaProductos);
-    }
 
+    
+   
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarDatos();
-        cmbDistribuidor.setItems(listarDistribuidores());
-        cmbCategoria.setItems(listarCategoriaProductos());
     }
+    
+    
 }

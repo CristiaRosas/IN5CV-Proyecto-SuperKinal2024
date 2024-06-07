@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.cristianrosas.controller;
 
 import java.net.URL;
@@ -15,21 +20,28 @@ import javafx.scene.control.TextField;
 import org.cristianrosas.dao.Conexion;
 import org.cristianrosas.model.Usuario;
 import org.cristianrosas.system.Main;
-import org.cristianrosas.utilis.PasswordUtils;
-import org.cristianrosas.utilis.SuperKinalAlert;
+import org.cristianrosas.utils.PasswordUtils;
+import org.cristianrosas.utils.SuperKinalAlert;
 
+/**
+ * FXML Controller class
+ *
+ * @author Lenovo
+ */
 public class LoginController implements Initializable {
     private Main stage;
     private int op = 0;
     
     private static Connection conexion = null;
     private static PreparedStatement statement = null;
-    private static ResultSet resultSet = null;
+    private static ResultSet resultset = null;
     
     @FXML
     TextField tfUser;
+    
     @FXML
     PasswordField tfPassword;
+    
     @FXML
     Button btnIniciar, btnRegistrar;
     
@@ -56,18 +68,23 @@ public class LoginController implements Initializable {
                 }
             }else{
                 stage.menuPrincipalView();
-            }
+            } 
         }else if(event.getSource() == btnRegistrar){
             stage.formUsuarioView();
         }
     }
-
+    
+    
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-    }
-    
-    public void setStage(Main stage){
+        // TODO
+    }    
+   
+
+    public void setStage(Main stage) {
         this.stage = stage;
     }
     
@@ -77,15 +94,14 @@ public class LoginController implements Initializable {
             conexion = Conexion.getInstance().obtenerConexion();
             String sql = "call sp_buscarUsuario(?)";
             statement = conexion.prepareStatement(sql);
-            statement.setString(1 ,tfUser.getText());
-            resultSet = statement.executeQuery();
-            
-            if(resultSet.next()){
-                int usuarioId = resultSet.getInt("usuarioId");
-                String user = resultSet.getString("usuario");
-                String contrasenia = resultSet.getString("contrasenia");
-                int nivelAccesoId = resultSet.getInt("nivelAccesoId");
-                int empleadoId = resultSet.getInt("empleadoId");
+            statement.setString(1, tfUser.getText());
+            resultset = statement.executeQuery();
+            if(resultset.next()){
+                int usuarioId = resultset.getInt("usuarioId");
+                String user = resultset.getString("usuario");
+                String contrasenia = resultset.getString("contrasenia");
+                int nivelAccesoId = resultset.getInt("nivelAccesoId");
+                int empleadoId = resultset.getInt("empleadoId");
                 
                 usuario = new Usuario(usuarioId, user, contrasenia, nivelAccesoId, empleadoId);
             }
@@ -93,11 +109,11 @@ public class LoginController implements Initializable {
             System.out.println(e.getMessage());
         }finally{
             try{
-                if(resultSet != null){
-                    resultSet.close();
-                }
                 if(statement != null){
-                    statement.close();
+                statement.close();
+                }
+                if(resultset != null){
+                    resultset.close();
                 }
                 if(conexion != null){
                     conexion.close();
@@ -105,8 +121,12 @@ public class LoginController implements Initializable {
             }catch(SQLException e){
                 System.out.println(e.getMessage());
             }
+            
         }
         
         return usuario;
     }
+    
+    
+    
 }

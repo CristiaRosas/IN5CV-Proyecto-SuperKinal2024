@@ -26,7 +26,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.cristianrosas.dao.Conexion;
 import org.cristianrosas.dto.CargoDTO;
 import org.cristianrosas.model.Cargo;
+import org.cristianrosas.model.Cliente;
 import org.cristianrosas.system.Main;
+import org.cristianrosas.utils.SuperKinalAlert;
 
 /**
  * FXML Controller class
@@ -60,7 +62,7 @@ public class MenuCargosController implements Initializable {
         ArrayList<Cargo> cargos = new ArrayList<>();
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_listarCargo()";
+            String sql = "call sp_listarCargos()";
             statement = conexion.prepareStatement(sql);
             resultset = statement.executeQuery();
             
@@ -102,7 +104,7 @@ public class MenuCargosController implements Initializable {
      public void agregarCargo(){
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_agregarCargo(?, ?)";
+            String sql = "call sp_agregarCargos(?, ?)";
             statement = conexion.prepareStatement(sql);
             statement.setString(1, tfNombreCargo.getText());
             statement.setString(2, taDescripcion.getText());
@@ -135,14 +137,24 @@ public class MenuCargosController implements Initializable {
     
     public void handleButtonAction(ActionEvent event){
         if(event.getSource() == btnAgregar){
-            agregarCargo();
-            vaciarCampos();
-            cargarLista();
+            if(!tfNombreCargo.getText().equals("") && !taDescripcion.getText().equals("")){
+                    agregarCargo();
+                    SuperKinalAlert.getInstance().mostrarAlertaInfo(401);
+                    CargoDTO.getCargoDTO().setCargo(null);
+                    vaciarCampos();
+                    cargarLista();
+                }else{
+                    SuperKinalAlert.getInstance().mostrarAlertaInfo(400);
+                    tfNombreCargo.requestFocus();
+                    return;
+                }
+            
+ 
         }else if(event.getSource() == btnRegresar){
             stage.menuPrincipalView();
         }else if(event.getSource() == btnEditar){
             CargoDTO.getCargoDTO().setCargo((Cargo)tblCargos.getSelectionModel().getSelectedItem());
-            stage.formCargosView();
+            stage.menuEditarCargosView();
         }
     }
     

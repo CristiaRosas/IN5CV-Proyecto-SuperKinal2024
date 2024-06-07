@@ -9,7 +9,7 @@ import org.cristianrosas.model.Cliente;
 
 /**
  *
- * @author Lenovo
+ * @author informatica
  */
 public class ClienteDTO {
     private static ClienteDTO instance;

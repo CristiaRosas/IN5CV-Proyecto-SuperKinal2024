@@ -16,33 +16,33 @@
             <Image url="@../image/FondoMenuCompras.png" />
          </image>
       </ImageView>
-      <TextField fx:id="tfCompraId" editable="false" layoutX="34.0" layoutY="339.0" prefHeight="36.0" prefWidth="269.0" promptText="Id de la compra" />
-      <TextField fx:id="tfFecha" layoutX="410.0" layoutY="339.0" prefHeight="36.0" prefWidth="269.0" />
-      <TextField fx:id="tfTotal" layoutX="813.0" layoutY="339.0" prefHeight="36.0" prefWidth="261.0" />
-      <TableView fx:id="tblCompras" layoutX="34.0" layoutY="432.0" onMouseClicked="#cargarDatosEditar" prefHeight="256.0" prefWidth="469.0">
+      <TextField fx:id="tfCompraId" editable="false" layoutX="25.0" layoutY="334.0" prefHeight="35.0" prefWidth="250.0" promptText="Id de la compra" />
+      <TextField fx:id="tfFecha" layoutX="402.0" layoutY="334.0" prefHeight="35.0" prefWidth="250.0" />
+      <TextField fx:id="tfTotal" layoutX="818.0" layoutY="334.0" prefHeight="35.0" prefWidth="250.0" />
+      <TableView fx:id="tblCompras" layoutX="136.0" layoutY="405.0" onMouseClicked="#cargarDatosEditar" prefHeight="322.0" prefWidth="366.0">
         <columns>
           <TableColumn fx:id="colCompraId" prefWidth="75.0" text="compraId" />
-          <TableColumn fx:id="colFecha" prefWidth="184.0" text="fecha" />
-            <TableColumn fx:id="colTotal" minWidth="0.0" prefWidth="209.0" text="total" />
+          <TableColumn fx:id="colFecha" prefWidth="75.0" text="fecha" />
+            <TableColumn fx:id="colTotal" prefWidth="215.19998779296873" text="total" />
         </columns>
       </TableView>
-      <Button fx:id="btnGuardar" layoutX="555.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="65.0" prefWidth="90.0" style="-fx-background-radius: 10; -fx-background-color: GREEN;" text="Guardar" textFill="WHITE">
+      <Button fx:id="btnGuardar" layoutX="555.0" layoutY="509.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: green;" text="Guardar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button fx:id="btnEliminar" layoutX="668.0" layoutY="524.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="65.0" prefWidth="90.0" style="-fx-background-radius: 10; -fx-background-color: RED;" text="Eliminar" textFill="WHITE">
+      <Button fx:id="btnEliminar" layoutX="659.0" layoutY="509.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: red;" text="Eliminar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button layoutX="780.0" layoutY="524.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="65.0" prefWidth="90.0" style="-fx-background-radius: 10; -fx-background-color: blue;" text="Reporte" textFill="WHITE">
+      <Button layoutX="772.0" layoutY="509.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: blue;" text="Reporte" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button fx:id="btnRegresar" layoutX="899.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="65.0" prefWidth="90.0" style="-fx-background-radius: 10; -fx-background-color: green;" text="Regresar" textFill="WHITE">
+      <Button fx:id="btnRegresar" layoutX="994.0" layoutY="509.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: green;" text="Regresar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button fx:id="btnVaciar" layoutX="1018.0" layoutY="528.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="65.0" prefWidth="90.0" style="-fx-background-radius: 10; -fx-background-color: grey;" text="Vaciar" textFill="WHITE">
+      <Button fx:id="btnVaciar" layoutX="883.0" layoutY="509.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Vaciar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>

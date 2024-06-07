@@ -9,7 +9,7 @@ import org.cristianrosas.model.Distribuidor;
 
 /**
  *
- * @author Lenovo
+ * @author Joaki
  */
 public class DistribuidorDTO {
     private static DistribuidorDTO instance;

@@ -9,7 +9,7 @@ import org.cristianrosas.model.Producto;
 
 /**
  *
- * @author Lenovo
+ * @author Joaki
  */
 public class ProductoDTO {
     private static ProductoDTO instance;

@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -26,6 +27,7 @@ import org.cristianrosas.dao.Conexion;
 import org.cristianrosas.dto.CategoriaProductoDTO;
 import org.cristianrosas.model.CategoriaProducto;
 import org.cristianrosas.system.Main;
+import org.cristianrosas.utils.SuperKinalAlert;
 
 /**
  * FXML Controller class
@@ -55,7 +57,7 @@ public class MenuCategoriaProductosController implements Initializable {
         ArrayList<CategoriaProducto> categoriaProductos = new ArrayList<>();
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_listarCategoriaProducto()";
+            String sql = "call sp_listarCategoriaProductos()";
             statement = conexion.prepareStatement(sql);
             resultset = statement.executeQuery();
             
@@ -98,7 +100,7 @@ public class MenuCategoriaProductosController implements Initializable {
     public void eliminarCategoriaProducto(int catProId){
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_eliminarCategoriaProducto(?)";
+            String sql = "call sp_eliminarCategoriaProductos(?)";
             statement = conexion.prepareStatement(sql);
             statement.setInt(1, catProId);
             statement.execute();
@@ -122,7 +124,7 @@ public class MenuCategoriaProductosController implements Initializable {
         CategoriaProducto categoriaProducto = null;
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_buscarCategoriaProducto(?)";
+            String sql = "call sp_buscarCategoriaProductos(?)";
             statement = conexion.prepareStatement(sql);
             statement.setInt(1 ,Integer.parseInt(tfCategoriaProductoId.getText()));
             resultset = statement.executeQuery();
@@ -179,15 +181,17 @@ public class MenuCategoriaProductosController implements Initializable {
         }else if(event.getSource() == btnRegresar){
             stage.menuPrincipalView();
         }else if(event.getSource() == btnEliminar){
-            int catProId = ((CategoriaProducto)tblCategoriaProductos.getSelectionModel().getSelectedItem()).getCategoriaProductosId();
-            eliminarCategoriaProducto(catProId);
-            cargarLista();
+            if(SuperKinalAlert.getInstance().mostrarAlertaConfirmacion(405).get() == ButtonType.OK){
+                int catProId = ((CategoriaProducto)tblCategoriaProductos.getSelectionModel().getSelectedItem()).getCategoriaProductosId();
+                eliminarCategoriaProducto(catProId);
+                cargarLista();
+            }
         }else if (event.getSource() == btnBuscar){
             tblCategoriaProductos.getItems().clear();
             if(tfCategoriaProductoId.getText().equals("")){
                 cargarLista();
             }else{
-                tblCategoriaProductos.setItems(listarCategoriaProductos());
+                tblCategoriaProductos.getItems().add(buscarCategoriaProducto());
                 colCategoriaProductosId.setCellValueFactory(new PropertyValueFactory<CategoriaProducto, Integer>("categoriaProductosId"));
                 colNombreCategoria.setCellValueFactory(new PropertyValueFactory<CategoriaProducto, String>("nombreCategoria"));
                 colDescripcionCategoria.setCellValueFactory(new PropertyValueFactory<CategoriaProducto, String>("descripcionCategoria"));

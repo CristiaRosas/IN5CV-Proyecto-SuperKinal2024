@@ -15,24 +15,15 @@
             <Image url="@../image/FondoFormLogin.png" />
          </image>
       </ImageView>
-      <TextField fx:id="tfUser" layoutX="96.0" layoutY="227.0" prefHeight="32.0" prefWidth="307.0" promptText="Usuario" style="-fx-background-radius: 15;">
+      <TextField fx:id="tfUser" layoutX="103.0" layoutY="223.0" prefHeight="38.0" prefWidth="286.0" style="-fx-background-radius: 10;" />
+      <PasswordField fx:id="tfPassword" layoutX="91.0" layoutY="400.0" prefHeight="38.0" prefWidth="310.0" style="-fx-background-radius: 10;" />
+      <Button fx:id="btnIniciar" layoutX="194.0" layoutY="505.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="111.0" style="-fx-background-radius: 15; -fx-background-color: green;" text="Iniciar Sesion" textFill="WHITE" wrapText="true">
          <font>
-            <Font name="Verdana" size="14.0" />
-         </font>
-      </TextField>
-      <PasswordField fx:id="tfPassword" layoutX="97.0" layoutY="405.0" prefHeight="32.0" prefWidth="307.0" promptText="Contraseña" style="-fx-background-radius: 15;">
+            <Font size="14.0" />
+         </font></Button>
+      <Button fx:id="btnRegistrar" disable="true" layoutX="194.0" layoutY="592.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="111.0" style="-fx-background-radius: 15; -fx-background-color: blue;" text="Registrar Usuario" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
-            <Font name="Verdana" size="14.0" />
-         </font>
-      </PasswordField>
-      <Button fx:id="btnIniciar" layoutX="111.0" layoutY="505.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="130.0" style="-fx-background-color: blue; -fx-background-radius: ;" text="Iniciar Sesión" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-         <font>
-            <Font name="Elephant" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnRegistar" alignment="CENTER" disable="true" layoutX="273.0" layoutY="505.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="55.0" prefWidth="130.0" style="-fx-background-color: red; -fx-background-radius: ;" text="Registrar Usuario" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-         <font>
-            <Font name="Elephant" size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Button>
    </children>

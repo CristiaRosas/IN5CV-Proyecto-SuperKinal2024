@@ -14,17 +14,17 @@ public class Usuario {
     private String usuario;
     private String contrasenia;
     private int nivelAccesoId;
-    private int empleadosId;
-    
-    public Usuario(){  
+    private int empleadoId;
+
+    public Usuario() {
     }
 
-    public Usuario(int usuarioId, String usuario, String contrasenia, int nivelAccesoId, int empleadosId) {
+    public Usuario(int usuarioId, String usuario, String contrasenia, int nivelAccesoId, int empleadoId) {
         this.usuarioId = usuarioId;
         this.usuario = usuario;
         this.contrasenia = contrasenia;
         this.nivelAccesoId = nivelAccesoId;
-        this.empleadosId = empleadosId;
+        this.empleadoId = empleadoId;
     }
 
     public int getUsuarioId() {
@@ -59,17 +59,19 @@ public class Usuario {
         this.nivelAccesoId = nivelAccesoId;
     }
 
-    public int getEmpleadosId() {
-        return empleadosId;
+    public int getEmpleadoId() {
+        return empleadoId;
     }
 
-    public void setEmpleadosId(int empleadosId) {
-        this.empleadosId = empleadosId;
+    public void setEmpleadoId(int empleadoId) {
+        this.empleadoId = empleadoId;
     }
-    
+
     @Override
     public String toString() {
-        return "Id: " + usuarioId + " | " + usuario;
-    }   
+        return "ID: " + usuarioId + " - " + usuario;
+    }
     
+    
+            
 }

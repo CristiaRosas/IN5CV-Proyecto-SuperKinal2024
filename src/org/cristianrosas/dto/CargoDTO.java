@@ -9,7 +9,7 @@ import org.cristianrosas.model.Cargo;
 
 /**
  *
- * @author Lenovo
+ * @author Joaki
  */
 public class CargoDTO {
     private static CargoDTO instance;

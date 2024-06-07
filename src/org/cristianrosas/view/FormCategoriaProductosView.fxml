@@ -15,14 +15,14 @@
             <Image url="@../image/FondoCategoriaProductos.png" />
          </image>
       </ImageView>
-      <TextField fx:id="tfCategoriaProductosId" editable="false" layoutX="14.0" layoutY="193.0" prefHeight="35.0" prefWidth="217.0" promptText="Id de la categoria del producto" />
-      <TextField fx:id="tfNombreCategoria" layoutX="14.0" layoutY="317.0" prefHeight="35.0" prefWidth="217.0" />
-      <TextArea fx:id="taDescripcionCategoria" layoutX="42.0" layoutY="493.0" prefHeight="165.0" prefWidth="300.0" wrapText="true" />
-      <Button fx:id="btnAgregar" layoutX="390.0" layoutY="390.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="50.0" prefWidth="90.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Agregar" textFill="WHITE">
+      <TextField fx:id="tfCategoriaProductosId" editable="false" layoutX="27.0" layoutY="199.0" prefHeight="27.0" prefWidth="290.0" promptText="Id de la categoria del producto" />
+      <TextField fx:id="tfNombreCategoria" layoutX="36.0" layoutY="312.0" prefHeight="36.0" prefWidth="282.0" />
+      <TextArea fx:id="taDescripcionCategoria" layoutX="36.0" layoutY="490.0" prefHeight="180.0" prefWidth="319.0" wrapText="true" />
+      <Button fx:id="btnAgregar" layoutX="395.0" layoutY="348.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: green;" text="Agregar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button fx:id="btnCancelar" layoutX="390.0" layoutY="510.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="50.0" prefWidth="90.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="Cancelar" textFill="WHITE">
+      <Button fx:id="btnCancelar" layoutX="386.0" layoutY="468.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: red;" text="Cancelar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>

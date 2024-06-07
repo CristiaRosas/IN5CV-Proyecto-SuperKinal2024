@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -26,11 +27,12 @@ import org.cristianrosas.dao.Conexion;
 import org.cristianrosas.dto.EmpleadoDTO;
 import org.cristianrosas.model.Empleado;
 import org.cristianrosas.system.Main;
+import org.cristianrosas.utils.SuperKinalAlert;
 
 /**
  * FXML Controller class
  *
- * @author Lenovo
+ * @author Joaki
  */
 public class MenuEmpleadosController implements Initializable {
     private Main stage;
@@ -63,21 +65,21 @@ public class MenuEmpleadosController implements Initializable {
         ArrayList<Empleado> empleados = new ArrayList<>();
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_listarEmpleado()";
+            String sql = "call sp_listarEmpleados()";
             statement = conexion.prepareStatement(sql);
             resultset = statement.executeQuery();
             
             while(resultset.next()){
                 int empleadoId = resultset.getInt("empleadoId");
-                String nombreEmpleado = resultset.getString("nombreEmpleado");
-                String apellidoEmpleado = resultset.getString("apellidoEmpleado");
+                String nombre = resultset.getString("nombreEmpleado");
+                String apellido = resultset.getString("apellidoEmpleado");
                 double sueldo = resultset.getDouble("sueldo");
                 String horaEntrada = resultset.getString("horaEntrada");
                 String horaSalida = resultset.getString("horaSalida");
-                String cargo = resultset.getString("cargoId");
-                String encargado = resultset.getString("encargadoId");
+                String cargo = resultset.getString("nombreCargo");
+                String encargado = resultset.getString("Encargado");
 
-                empleados.add(new Empleado(empleadoId, nombreEmpleado, apellidoEmpleado, sueldo, horaEntrada, horaSalida, cargo, encargado));
+                empleados.add(new Empleado(empleadoId, nombre, apellido, sueldo, horaEntrada, horaSalida, cargo, encargado));
             }
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -102,6 +104,7 @@ public class MenuEmpleadosController implements Initializable {
     
     
     
+    
     public void cargarLista(){
         tblEmpleados.setItems(listarEmpleados());
         colEmpleadoId.setCellValueFactory(new PropertyValueFactory<Empleado, Integer>("empleadoId"));
@@ -110,15 +113,15 @@ public class MenuEmpleadosController implements Initializable {
         colSueldo.setCellValueFactory(new PropertyValueFactory<Empleado, Double>("sueldo"));
         colEntrada.setCellValueFactory(new PropertyValueFactory<Empleado, String>("horaEntrada"));
         colSalida.setCellValueFactory(new PropertyValueFactory<Empleado, String>("horaSalida"));
-        colCargo.setCellValueFactory(new PropertyValueFactory<Empleado, String>("cargoId"));
-        colEncargado.setCellValueFactory(new PropertyValueFactory<Empleado, String>("encargadoId"));
+        colCargo.setCellValueFactory(new PropertyValueFactory<Empleado, String>("nombreCargo"));
+        colEncargado.setCellValueFactory(new PropertyValueFactory<Empleado, String>("Encargado"));
 
     }
     
     public void eliminarEmpleados(int empId){
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_eliminarEmpleado(?)";
+            String sql = "call sp_eliminarEmpleados(?)";
             statement = conexion.prepareStatement(sql);
             statement.setInt(1, empId);
             statement.execute();
@@ -142,7 +145,7 @@ public class MenuEmpleadosController implements Initializable {
         Empleado empleado = null;
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_buscarEmpleado(?)";
+            String sql = "call sp_buscarEmpleados(?)";
             statement = conexion.prepareStatement(sql);
             statement.setInt(1 ,Integer.parseInt(tfEmpleadosId.getText()));
             resultset = statement.executeQuery();
@@ -154,8 +157,8 @@ public class MenuEmpleadosController implements Initializable {
                 double sueldo = resultset.getDouble("sueldo");
                 String horaEntrada = resultset.getString("horaEntrada");
                 String horaSalida = resultset.getString("horaSalida");
-                String cargo = resultset.getString("cargoId");
-                String encargado = resultset.getString("encargadoId");
+                String cargo = resultset.getString("nombreCargo");
+                String encargado = resultset.getString("Encargado");
                 
                 empleado = (new Empleado(empleadoId, nombreEmpleado, apellidoEmpleado, sueldo, horaEntrada, horaSalida, cargo, encargado));
             }
@@ -199,9 +202,11 @@ public class MenuEmpleadosController implements Initializable {
         }else if(event.getSource() == btnRegresar){
             stage.menuPrincipalView();
         }else if(event.getSource() == btnEliminar){
-            int empId = ((Empleado)tblEmpleados.getSelectionModel().getSelectedItem()).getEmpleadoId();
-            eliminarEmpleados(empId);
-            cargarLista();
+            if(SuperKinalAlert.getInstance().mostrarAlertaConfirmacion(405).get() == ButtonType.OK){
+                int empId = ((Empleado)tblEmpleados.getSelectionModel().getSelectedItem()).getEmpleadoId();
+                eliminarEmpleados(empId);
+                cargarLista(); 
+            }
         }else if (event.getSource() == btnBuscar){
             tblEmpleados.getItems().clear();
             if(tfEmpleadosId.getText().equals("")){
@@ -214,8 +219,8 @@ public class MenuEmpleadosController implements Initializable {
                 colSueldo.setCellValueFactory(new PropertyValueFactory<Empleado, String>("sueldo"));
                 colEntrada.setCellValueFactory(new PropertyValueFactory<Empleado, String>("horaEntrada"));
                 colSalida.setCellValueFactory(new PropertyValueFactory<Empleado, String>("horaSalida"));
-                colCargo.setCellValueFactory(new PropertyValueFactory<Empleado, String>("cargoId"));
-                colEncargado.setCellValueFactory(new PropertyValueFactory<Empleado, String>("encargadoId"));
+                colCargo.setCellValueFactory(new PropertyValueFactory<Empleado, String>("nombreCargo"));
+                colEncargado.setCellValueFactory(new PropertyValueFactory<Empleado, String>("Encargado"));
             }
         }
     }

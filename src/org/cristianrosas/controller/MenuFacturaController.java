@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.cristianrosas.controller;
 
 import java.net.URL;
@@ -17,7 +22,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -27,7 +34,13 @@ import org.cristianrosas.model.Cliente;
 import org.cristianrosas.model.Empleado;
 import org.cristianrosas.model.Factura;
 import org.cristianrosas.system.Main;
+import org.cristianrosas.utils.SuperKinalAlert;
 
+/**
+ * FXML Controller class
+ *
+ * @author Lenovo
+ */
 public class MenuFacturaController implements Initializable {
     
     private Main stage;
@@ -57,10 +70,28 @@ public class MenuFacturaController implements Initializable {
             stage.menuPrincipalView();
         }else if(event.getSource() == btnGuardar){
             if(tfFacturaId.getText().equals("")){
-                agregarFacturas();
-                cargarDatos();
+                if(!tfHora.getText().equals("") && !tfFecha.getText().equals("")){
+                    agregarFacturas();
+                    SuperKinalAlert.getInstance().mostrarAlertaInfo(401);
+                    cargarDatos();
+                }else{
+                    SuperKinalAlert.getInstance().mostrarAlertaInfo(400);
+                    tfHora.requestFocus();
+                    return;
+                }
+               
             }else{
-                editarFacturas();
+                if(!tfHora.getText().equals("") && !tfTotal.getText().equals("") && !tfFecha.getText().equals("")){
+                    if(SuperKinalAlert.getInstance().mostrarAlertaConfirmacion(406).get() == ButtonType.OK){
+                        editarFacturas();
+                        cargarDatos();
+                    }
+                }else{
+                    SuperKinalAlert.getInstance().mostrarAlertaInfo(400);
+                    tfHora.requestFocus();    
+                    return;
+                }
+                
             }
         }else if(event.getSource() == btnVaciar){
             vaciarCampos();
@@ -69,9 +100,7 @@ public class MenuFacturaController implements Initializable {
     
     
     public void vaciarCampos(){
-        tfFecha.clear();
         tfFacturaId.clear();
-        tfHora.clear();
         tfTotal.clear();
         cmbCliente.getSelectionModel().clearSelection();
         cmbEmpleado.getSelectionModel().clearSelection();
@@ -83,9 +112,9 @@ public class MenuFacturaController implements Initializable {
         colFacturaId.setCellValueFactory(new PropertyValueFactory<Factura, Integer>("facturaId"));
         colFecha.setCellValueFactory(new PropertyValueFactory<Factura, LocalDate>("fecha"));
         colHora.setCellValueFactory(new PropertyValueFactory<Factura, LocalTime>("hora"));
+        colTotal.setCellValueFactory(new PropertyValueFactory<Factura, Double>("total"));
         colCliente.setCellValueFactory(new PropertyValueFactory<Factura, String>("cliente"));
         colEmpleado.setCellValueFactory(new PropertyValueFactory<Factura, String>("empleado"));
-        colTotal.setCellValueFactory(new PropertyValueFactory<Factura, Double>("total"));
         tblFacturas.getSortOrder().add(colFacturaId);
     }
     
@@ -93,6 +122,9 @@ public class MenuFacturaController implements Initializable {
         Factura fa = (Factura)tblFacturas.getSelectionModel().getSelectedItem();
         if(fa != null){
             tfFacturaId.setText(Integer.toString(fa.getFacturaId()));
+            tfFecha.setText(fa.getFecha().toString());
+            tfHora.setText(fa.getHora().toString());
+            tfTotal.setText(Double.toString(fa.getTotal()));
             cmbCliente.getSelectionModel().select(obtenerIndexCliente());
             cmbEmpleado.getSelectionModel().select(obtenerIndexEmpleado());
         }
@@ -130,7 +162,7 @@ public class MenuFacturaController implements Initializable {
         ArrayList<Factura> facturas = new ArrayList<>();
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_listarFactura()";
+            String sql = "call sp_listarFacturas()";
             statement = conexion.prepareStatement(sql);
             resultset = statement.executeQuery();
             
@@ -138,12 +170,12 @@ public class MenuFacturaController implements Initializable {
                 int facturaId = resultset.getInt("facturaId");
                 Date fecha = resultset.getDate("fecha");
                 Time hora = resultset.getTime("hora");
-                String cliente = resultset.getString("cliente");
-                String empleado = resultset.getString("empleado");
                 Double total = resultset.getDouble("total");
+                String cliente = resultset.getString("nombre");
+                String empleado = resultset.getString("nombreEmpleado");
 
                 
-                facturas.add(new Factura(facturaId, fecha.toLocalDate(), hora.toLocalTime(), cliente, empleado, total));
+                facturas.add(new Factura(facturaId, fecha.toLocalDate(), hora.toLocalTime(), total, cliente, empleado));
             }
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -209,7 +241,7 @@ public class MenuFacturaController implements Initializable {
         ArrayList<Empleado> empleados = new ArrayList<>();
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_listarEmpleado()";
+            String sql = "call sp_listarEmpleados()";
             statement = conexion.prepareStatement(sql);
             resultset = statement.executeQuery();
             
@@ -220,8 +252,8 @@ public class MenuFacturaController implements Initializable {
                 double sueldo = resultset.getDouble("sueldo");
                 String horaEntrada = resultset.getString("horaEntrada");
                 String horaSalida = resultset.getString("horaSalida");
-                String cargo = resultset.getString("cargoId");
-                String encargado = resultset.getString("encargadoId");
+                String cargo = resultset.getString("nombreCargo");
+                String encargado = resultset.getString("encargado");
 
                 empleados.add(new Empleado(empleadoId, nombreEmpleado, apellidoEmpleado, sueldo, horaEntrada, horaSalida, cargo, encargado));
             }
@@ -249,14 +281,13 @@ public class MenuFacturaController implements Initializable {
     public void agregarFacturas(){
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_agregarFactura(?, ?, ?, ?, ?)";
+            String sql = "call sp_agregarFacturas(?, ?, ?, ?, ?)";
             statement = conexion.prepareStatement(sql);
             statement.setDate(1, Date.valueOf(LocalDate.now()));
             statement.setTime(2, Time.valueOf(LocalTime.now()));
-            statement.setInt(3, ((Cliente)cmbCliente.getSelectionModel().getSelectedItem()).getClienteId());
-            statement.setInt(4, ((Empleado)cmbEmpleado.getSelectionModel().getSelectedItem()).getEmpleadoId());
-            statement.setDouble(5, 0);
-            
+            statement.setDouble(3, 0);
+            statement.setInt(4, ((Cliente)cmbCliente.getSelectionModel().getSelectedItem()).getClienteId());
+            statement.setInt(5, ((Empleado)cmbEmpleado.getSelectionModel().getSelectedItem()).getEmpleadoId());
             statement.execute();
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -278,12 +309,14 @@ public class MenuFacturaController implements Initializable {
     public void editarFacturas(){
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_editarFactura(?, ?, ?, ?)";
+            String sql = "call sp_editarFacturas(?, ?, ?, ?, ?, ?)";
             statement = conexion.prepareStatement(sql);
             statement.setInt(1, Integer.parseInt(tfFacturaId.getText()));
-            statement.setInt(2, ((Cliente)cmbCliente.getSelectionModel().getSelectedItem()).getClienteId());
-            statement.setInt(3, ((Empleado)cmbEmpleado.getSelectionModel().getSelectedItem()).getEmpleadoId());
+            statement.setDate(2, Date.valueOf(tfFecha.getText()));
+            statement.setTime(3, Time.valueOf(tfHora.getText()));
             statement.setDouble(4, 0);
+            statement.setInt(5, ((Cliente)cmbCliente.getSelectionModel().getSelectedItem()).getClienteId());
+            statement.setInt(6, ((Empleado)cmbEmpleado.getSelectionModel().getSelectedItem()).getEmpleadoId());
             statement.execute();
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -301,6 +334,10 @@ public class MenuFacturaController implements Initializable {
         }
     }
      
+
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cmbCliente.setItems(listarClientes());
@@ -318,5 +355,6 @@ public class MenuFacturaController implements Initializable {
     public void setStage(Main stage) {
         this.stage = stage;
     }
-
+    
+    
 }

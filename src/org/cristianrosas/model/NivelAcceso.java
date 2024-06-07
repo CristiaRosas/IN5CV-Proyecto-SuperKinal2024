@@ -12,9 +12,8 @@ package org.cristianrosas.model;
 public class NivelAcceso {
     private int nivelAccesoId;
     private String nivelAcceso;
-    
-    public NivelAcceso(){
-        
+
+    public NivelAcceso() {
     }
 
     public NivelAcceso(int nivelAccesoId, String nivelAcceso) {
@@ -38,8 +37,10 @@ public class NivelAcceso {
         this.nivelAcceso = nivelAcceso;
     }
 
-     @Override
+    @Override
     public String toString() {
-        return "ID: " + nivelAccesoId + " | " + nivelAcceso;
-    }   
+        return "ID: " + nivelAccesoId + " - " + nivelAcceso;
+    }
+    
+    
 }

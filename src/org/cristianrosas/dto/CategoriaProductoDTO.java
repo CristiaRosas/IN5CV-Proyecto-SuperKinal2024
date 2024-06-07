@@ -8,7 +8,7 @@ import org.cristianrosas.model.CategoriaProducto;
 
 /**
  *
- * @author Lenovo
+ * @author informatica
  */
 public class CategoriaProductoDTO {
     private static CategoriaProductoDTO instance;

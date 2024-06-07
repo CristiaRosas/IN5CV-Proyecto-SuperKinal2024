@@ -1,17 +1,25 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.cristianrosas.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ *
+ * @author Lenovo
+ */
 public class Conexion {
     private static Conexion instance;
-    
-    private String url = "jdbc:mysql://localhost:3306/SuperKinalDB?serverTimezone=GMT-6&useSSL=false";
+    private String url = "jdbc:mysql://localhost:3306/superkinalIN5CV?serverTimeZone=GMT-6&useSSl=false";
     private String user = "CristianRosas";
     private String password = "Cristia3430U";
     
-    private Conexion(){
+    public Conexion(){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
         }catch(ClassNotFoundException e){
@@ -26,7 +34,9 @@ public class Conexion {
         return instance;
     }
     
-    public Connection obtenerConexion()throws SQLException{
+    public Connection obtenerConexion() throws SQLException{
         return DriverManager.getConnection(url, user, password);
     }
+    
+    
 }
