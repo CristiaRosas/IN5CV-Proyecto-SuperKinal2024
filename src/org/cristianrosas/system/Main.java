@@ -50,8 +50,8 @@ public class Main extends Application {
     @Override
     public void start(Stage stage){
         this.stage = stage;
-        Image Icon = new Image("org/cristianrosas/image/Icon.png");
-        stage.getIcons().add(Icon);
+        Image icon = new Image("org/cristianrosas/image/icon.png");
+        stage.getIcons().add(icon);
         stage.setTitle("SuperKinal");
           menuPrincipalView();
          // loginView();
