@@ -98,7 +98,7 @@ public class Main extends Application {
     
     public void menuCargosView(){
         try{
-            MenuCargosController menuCargosView = (MenuCargosController)switchScene("MenuCargosView.fxml", 500, 700);
+            MenuCargosController menuCargosView = (MenuCargosController)switchScene("MenuCargosView.fxml", 1200, 750);
             menuCargosView.setStage(this);
         }catch(Exception e){
             System.out.println(e.getMessage());

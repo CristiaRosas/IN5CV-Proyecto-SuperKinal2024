@@ -67,7 +67,7 @@ create procedure sp_agregarCargos(in nomCar varchar(30),in descCar varchar(100))
     end $$
 delimiter ;
 
-call sp_agregarCargos('Supervisor', 'Velar el que los trabajadores cumplan con lo requerido');
+call sp_agregarCargos('Supervisor', 'Supervisa');
 
 -- listar
 delimiter $$
@@ -121,7 +121,7 @@ create procedure sp_agregarEmpleados(in nomEmp varchar(30),in apeEmp varchar(30)
     end $$
 delimiter ;
 
-call sp_agregarEmpleados('Saul', 'De Leon', 8745.09, '09:00:00', '16:00:00', 1, null);
+call sp_agregarEmpleados('Carlos', 'Pacheco', 800.10, '09:00:00', '16:00:00', 1, null);
 
 -- listar
 delimiter $$
@@ -196,17 +196,40 @@ create procedure sp_editarEmpleados(in empId int, in nomEmp varchar(30), in apeE
 delimiter ;
 
 select * from Empleados;
-call sp_editarEmpleados(4, 'Sebastian', 'Lopez', 2043.26, '04:00:00', '20:00:00', 1, 2);
+call sp_editarEmpleados(4, 'Cristian', 'Luna', 2500.26, '04:00:00', '20:00:00', 1, 2);
 
 -- ----------------- FACTURAS -------------------------------------
 
 -- Agregar
 delimiter $$
-create procedure sp_agregarFacturas(in fe date, in ho time, in tot decimal(10, 2), in cliId int, in empId int)
-	begin
-		insert into Facturas (fecha, hora, total, clienteId, empleadoId) values
-			(fe, ho, tot, cliId, empId);
-    end $$
+create procedure sp_agregarFacturas(in fe date, in ho time, in tot decimal(10, 2), in cliId int, in empId int, in proId int)
+begin
+    declare facturaIdOld int;
+ 
+    insert into Facturas (fecha, hora, total, clienteId, empleadoId, productoId) 
+    values (fe, ho, tot, cliId, empId, proId);
+ 
+    set facturaIdOld = last_insert_id();
+ 
+    insert into detalleFactura (facturaId, productoId) 
+    values (facturaIdOld, proId);
+ 
+    call sp_asignarTotal(fn_totalFactura(facturaIdOld), facturaIdOld);
+end $$
+ 
+delimiter ;
+ 
+delimiter $$
+ 
+create procedure sp_agregarProductoAFactura(in facId int, in proId int)
+begin
+ 
+    insert into detalleFactura (facturaId, productoId) 
+    values (facId, proId);
+ 
+    call sp_asignarTotal(fn_totalFactura(facturaId), facturaId);
+end $$
+ 
 delimiter ;
 
 -- call sp_agregarFacturas('2021-04-20', '13:23:55', null, 1, 3);
@@ -218,9 +241,11 @@ create procedure sp_listarFacturas()
 	begin
 		select F.facturaId, F.fecha, F.hora, F.total,
         C.nombre,
-        E.nombreEmpleado from Facturas F
+        E.nombreEmpleado,
+        P.nombreProducto from Facturas F
         join Clientes C on C.clienteId = F.clienteId
-        join Empleados E on E.empleadoId = F.empleadoId;
+        join Empleados E on E.empleadoId = F.empleadoId
+        join Productos P on P.productoId = F.productoId;
     end $$
 delimiter ;
 
@@ -446,7 +471,7 @@ create procedure sp_agregarDistribuidor(nomDis varchar(30), dirDis varchar(200),
     end$$
 DELIMITER ;
 
-call sp_agregarDistribuidor('Dereck', 'Zona 2', '23529034-2', '6666-6666', null);
+call sp_agregarDistribuidor('Peralta', 'Amatitlan', 'CF', '1547-9874', null);
 
 -- Listar
 
@@ -724,19 +749,30 @@ delimiter ;
 
 call sp_agregarUsuario('Crosas', '1234', 1, 1);
 
+select * from Empleados;
+
 delimiter $$
 create procedure sp_buscarUsuario(us varchar(30))
 begin
-	select * from Usuarios
+	select * from Usuario
 		where usuario = us;
 end$$
 delimiter ;
-select*from NivelesAcceso;
-select * from Productos;
-select*from Empleados;
-select*from detalleFactura;
 
-select * from detalleFactura DF
+delimiter $$
+create procedure sp_listarNivelesAcceso()
+begin
+	select * from NivelesAcceso;
+end$$
+delimiter ;
+
+-- Niveles de acceso
+select * from Facturas;
+select * from NivelesAcceso;
+select*from Facturas;
+select * from DetalleFactura;
+select * from DetalleFactura DF
 join Productos P on DF.productoId = P.productoId
 join Facturas F on DF.facturaId = F.facturaId
 join Clientes C on F.clienteId = C.clienteId
+where F.facturaId = 1;
