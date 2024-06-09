@@ -1,4 +1,3 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,25 +5,6 @@
  */
 package org.cristianrosas.system;
 
-import org.cristianrosas.controller.FormCategoriaProductosController;
-import org.cristianrosas.controller.FormEmpleadosController;
-import org.cristianrosas.controller.MenuCategoriaProductosController;
-import org.cristianrosas.controller.MenuPromocionesController;
-import org.cristianrosas.controller.MenuDistribuidoresController;
-import org.cristianrosas.controller.MenuPrincipalController;
-import org.cristianrosas.controller.MenuAgregarClientesController;
-import org.cristianrosas.controller.FormDistribuidoresController;
-import org.cristianrosas.controller.MenuEditarCargosController;
-import org.cristianrosas.controller.MenuCargosController;
-import org.cristianrosas.controller.FormProductosController;
-import org.cristianrosas.controller.MenuFacturaController;
-import org.cristianrosas.controller.MenuEmpleadosController;
-import org.cristianrosas.controller.MenuProductosController;
-import org.cristianrosas.controller.LoginController;
-import org.cristianrosas.controller.MenuTicketSoporteController;
-import org.cristianrosas.controller.ResgistrarUsuarioController;
-import org.cristianrosas.controller.MenuComprasController;
-import org.cristianrosas.controller.MenuClientesController;
 import java.io.InputStream;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -34,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.cristianrosas.controller.* ;
 
 
 
@@ -53,8 +34,8 @@ public class Main extends Application {
         Image icon = new Image("org/cristianrosas/image/icon.png");
         stage.getIcons().add(icon);
         stage.setTitle("SuperKinal");
-          menuPrincipalView();
-         // loginView();
+        menuPrincipalView();
+        //loginView();
         stage.show();
 
     }
@@ -117,7 +98,7 @@ public class Main extends Application {
     
     public void menuCargosView(){
         try{
-            MenuCargosController menuCargosView = (MenuCargosController)switchScene("MenuCargosView.fxml", 1200, 750);
+            MenuCargosController menuCargosView = (MenuCargosController)switchScene("MenuCargosView.fxml", 500, 700);
             menuCargosView.setStage(this);
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -126,7 +107,7 @@ public class Main extends Application {
     
     public void menuEditarCargosView(){
         try{
-            MenuEditarCargosController menuEditarCargosView = (MenuEditarCargosController)switchScene("MenuEditarCargosView.fxml", 500, 700);
+            MenuEditarCargosController menuEditarCargosView = (MenuEditarCargosController)switchScene("MenuEditarCargosView.fxml", 1200, 750);
             menuEditarCargosView.setStage(this);
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -192,7 +173,7 @@ public class Main extends Application {
     
     public void menuFacturaView(){
         try{
-            MenuFacturaController menuFacturaView = (MenuFacturaController)switchScene("MenuFacturaView.fxml", 1200, 750);
+            MenuDetalleFacturasController menuFacturaView = (MenuDetalleFacturasController)switchScene("MenuFacturaView.fxml", 1200, 750);
             menuFacturaView.setStage(this);
         }catch(Exception e){
             System.out.println(e.getMessage());

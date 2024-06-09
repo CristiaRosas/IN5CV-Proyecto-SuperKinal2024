@@ -734,3 +734,9 @@ delimiter ;
 select*from NivelesAcceso;
 select * from Productos;
 select*from Empleados;
+select*from detalleFactura;
+
+select * from detalleFactura DF
+join Productos P on DF.productoId = P.productoId
+join Facturas F on DF.facturaId = F.facturaId
+join Clientes C on F.clienteId = C.clienteId

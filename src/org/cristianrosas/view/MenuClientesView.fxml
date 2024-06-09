@@ -16,43 +16,47 @@
             <Image url="@../image/FondoMenuCliente.png" />
          </image>
       </ImageView>
-      <TableView fx:id="tblClientes" layoutX="126.0" layoutY="254.0" prefHeight="410.0" prefWidth="766.0">
+      <TableView fx:id="tblClientes" layoutX="100.0" layoutY="202.0" prefHeight="400.0" prefWidth="654.0">
         <columns>
           <TableColumn fx:id="colClienteId" prefWidth="62.0" text="clienteId" />
-          <TableColumn fx:id="colNombre" prefWidth="134.40003967285156" text="nombre" />
-            <TableColumn fx:id="colApellido" prefWidth="126.39996337890625" text="apellido" />
-            <TableColumn fx:id="colTelefono" prefWidth="133.5999755859375" text="telefono" />
-            <TableColumn fx:id="colDireccion" prefWidth="187.2000732421875" text="direccion" />
-            <TableColumn fx:id="colNIT" prefWidth="120.00006103515625" text="NIT" />
+          <TableColumn fx:id="colNombre" prefWidth="107.0" text="nombre" />
+            <TableColumn fx:id="colApellido" prefWidth="101.0" text="apellido" />
+            <TableColumn fx:id="colTelefono" prefWidth="84.0" text="telefono" />
+            <TableColumn fx:id="colDireccion" prefWidth="187.0" text="direccion" />
+            <TableColumn fx:id="colNIT" prefWidth="92.0" text="NIT" />
         </columns>
       </TableView>
-      <Button fx:id="btnRegresar" layoutX="1051.0" layoutY="599.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: green;" text="Regresar" textFill="WHITE">
+      <Button fx:id="btnRegresar" layoutX="892.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="54.0" prefWidth="103.0" style="-fx-background-color: green;" text="Regresar">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <TextField fx:id="tfClienteId" layoutX="549.0" layoutY="213.0" prefHeight="26.0" prefWidth="290.0" promptText="Ingrese el ID del cliente a buscar" />
-      <Button fx:id="btnBuscar" layoutX="852.0" layoutY="213.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="40.0" />
-      <ImageView disable="true" fitHeight="25.0" fitWidth="28.0" layoutX="860.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+      <TextField fx:id="tfClienteId" layoutX="420.0" layoutY="163.0" prefHeight="23.0" prefWidth="255.0" promptText="Ingrese el ID del cliente a buscar" />
+      <Button fx:id="btnBuscar" layoutX="711.0" layoutY="163.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="40.0" />
+      <ImageView disable="true" fitHeight="25.0" fitWidth="28.0" layoutX="718.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true" smooth="false">
          <image>
             <Image url="@../image/Lupa.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnAgregar" layoutX="1051.0" layoutY="265.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: green;" text="Agregar" textFill="WHITE">
+      <Button fx:id="btnVerClientes" layoutX="652.0" layoutY="613.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="54.0" prefWidth="103.0" style="-fx-background-color: gray;" text="Ver Clientes">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button fx:id="btnAgregar" layoutX="1045.0" layoutY="265.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="54.0" prefWidth="92.0" style="-fx-background-color: green;" text="Agregar">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnEditar" layoutX="1051.0" layoutY="429.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="Editar" textFill="WHITE">
+      <Button fx:id="btnEditar" layoutX="1045.0" layoutY="348.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="54.0" prefWidth="92.0" style="-fx-background-color: orange;" text="Editar">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnEliminar" layoutX="1051.0" layoutY="345.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: red;" text="Eliminar" textFill="WHITE">
+      <Button fx:id="btnEliminar" layoutX="1052.0" layoutY="432.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="54.0" prefWidth="92.0" style="-fx-background-color: red;" text="Eliminar">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnReporte" layoutX="1051.0" layoutY="510.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: blue;" text="Reporte" textFill="WHITE">
+      <Button fx:id="btnReporte" layoutX="1052.0" layoutY="514.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="92.0" style="-fx-background-color: blue;" text="Reporte">
          <font>
             <Font size="14.0" />
          </font>

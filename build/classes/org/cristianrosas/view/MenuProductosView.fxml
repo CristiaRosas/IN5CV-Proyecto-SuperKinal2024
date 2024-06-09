@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.cristianrosas.controller.MenuProductosController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1176.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.cristianrosas.controller.MenuProductosController">
    <children>
-      <ImageView fitHeight="750.0" fitWidth="1200.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="750.0" fitWidth="1250.0" layoutX="-23.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/FondoMenuProductos.png" />
          </image>
       </ImageView>
-      <TableView fx:id="tblProductos" layoutX="307.0" layoutY="216.0" prefHeight="446.0" prefWidth="710.0">
+      <TableView fx:id="tblProductos" layoutX="304.0" layoutY="214.0" prefHeight="326.0" prefWidth="650.0">
         <columns>
           <TableColumn fx:id="colProductoId" prefWidth="75.0" text="productoId" />
           <TableColumn fx:id="colNombre" prefWidth="64.0" text="nombre" />
@@ -27,35 +27,35 @@
             <TableColumn fx:id="colPMayor" prefWidth="55.0" text="pMayor" />
             <TableColumn fx:id="colPCompra" prefWidth="84.0" text="pCompra" />
             <TableColumn fx:id="colDistribuidor" prefWidth="84.0" text="distribuidor" />
-            <TableColumn fx:id="colCategoria" prefWidth="142.39999999999998" text="categoria" />
+            <TableColumn fx:id="colCategoria" prefWidth="83.0" text="categoria" />
         </columns>
       </TableView>
-      <TextField fx:id="tfBuscar" layoutX="622.0" layoutY="177.0" prefHeight="26.0" prefWidth="330.0" promptText="Id del producto que desea buscar:" />
-      <Button fx:id="btnBuscar" layoutX="969.0" layoutY="177.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="44.0" />
-      <ImageView disable="true" fitHeight="25.0" fitWidth="24.0" layoutX="979.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
+      <TextField fx:id="tfBuscar" layoutX="629.0" layoutY="178.0" prefHeight="25.0" prefWidth="261.0" promptText="Id del producto que desea buscar:" />
+      <Button fx:id="btnBuscar" layoutX="907.0" layoutY="178.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="44.0" />
+      <ImageView disable="true" fitHeight="25.0" fitWidth="24.0" layoutX="917.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/Lupa.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnAgregar" layoutX="1079.0" layoutY="214.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: green;" text="Agregar" textFill="WHITE">
+      <Button fx:id="btnAgregar" layoutX="1046.0" layoutY="234.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: green;" text="Agregar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button fx:id="btnReporte" layoutX="1079.0" layoutY="498.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: blue;" text="Reporte" textFill="WHITE">
+      <Button fx:id="btnReporte" layoutX="1046.0" layoutY="496.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: blue;" text="Reporte" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button fx:id="btnEliminar" layoutX="1079.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: red;" text="Eliminar" textFill="WHITE">
+      <Button fx:id="btnEliminar" layoutX="1046.0" layoutY="409.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: red;" text="Eliminar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button fx:id="btnRegresar" layoutX="1079.0" layoutY="608.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: green;" text="Regresar" textFill="WHITE">
+      <Button fx:id="btnRegresar" layoutX="1046.0" layoutY="582.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: green;" text="Regresar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <ImageView fx:id="imgMostrar" fitHeight="230.0" fitWidth="200.0" layoutX="44.0" layoutY="312.0" onDragDropped="#handleOnDrop" onDragOver="#handleOnDrag" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgMostrar" fitHeight="230.0" fitWidth="200.0" layoutX="23.0" layoutY="324.0" onDragDropped="#handleOnDrop" onDragOver="#handleOnDrag" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="lblNombre" layoutX="682.0" layoutY="415.0" prefHeight="24.0" prefWidth="86.0" />
-      <Button fx:id="btnEditar" layoutX="1079.0" layoutY="409.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="Editar" textFill="WHITE">
+      <Button fx:id="btnEditar" layoutX="1046.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: orange;" text="Editar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>

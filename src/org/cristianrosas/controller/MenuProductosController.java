@@ -38,6 +38,7 @@ import javafx.scene.input.TransferMode;
 import org.cristianrosas.dao.Conexion;
 import org.cristianrosas.dto.ProductoDTO;
 import org.cristianrosas.model.Producto;
+import org.cristianrosas.report.GenerarReporte;
 import org.cristianrosas.system.Main;
 import org.cristianrosas.utils.SuperKinalAlert;
 
@@ -68,7 +69,7 @@ public class MenuProductosController implements Initializable {
     ComboBox cmbDistribuidor, cmbCategoria;
     
     @FXML
-    Button btnAgregar, btnEliminar, btnRegresar, btnEditar, btnBuscar;
+    Button btnAgregar, btnEliminar, btnRegresar, btnEditar, btnBuscar, btnReporte;
     
     
     @FXML
@@ -117,6 +118,8 @@ public class MenuProductosController implements Initializable {
                     colDistribuidor.setCellValueFactory(new PropertyValueFactory<Producto, String>("distribuidor"));
                     colCategoria.setCellValueFactory(new PropertyValueFactory<Producto, String>("categoria"));
                 }
+            }else if(event.getSource() == btnReporte){
+               
             }
             
         }catch(Exception e){

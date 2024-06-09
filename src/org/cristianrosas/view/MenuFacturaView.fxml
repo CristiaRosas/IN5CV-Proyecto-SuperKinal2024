@@ -10,46 +10,44 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.cristianrosas.controller.MenuFacturaController">
+<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.cristianrosas.controller.MenuDetalleFacturasController">
    <children>
       <ImageView fitHeight="750.0" fitWidth="1200.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/FondoMenuFactura.png" />
          </image>
       </ImageView>
-      <TextField fx:id="tfFacturaId" editable="false" layoutX="30.0" layoutY="242.0" prefHeight="35.0" prefWidth="190.0" promptText="Id de la factura" />
-      <TextField fx:id="tfHora" layoutX="30.0" layoutY="638.0" prefHeight="35.0" prefWidth="190.0" />
-      <ComboBox fx:id="cmbCliente" layoutX="30.0" layoutY="368.0" prefHeight="35.0" prefWidth="190.0" />
-      <ComboBox fx:id="cmbEmpleado" layoutX="30.0" layoutY="502.0" prefHeight="35.0" prefWidth="190.0" />
-      <TextField fx:id="tfTotal" layoutX="648.0" layoutY="134.0" prefHeight="35.0" prefWidth="190.0" promptText="TOTAL" />
-      <TableView fx:id="tblFacturas" layoutX="292.0" layoutY="358.0" onMouseClicked="#cargarDatosEditar" prefHeight="322.0" prefWidth="712.0">
+      <TextField fx:id="tfFacturaId" editable="false" layoutX="55.0" layoutY="237.0" promptText="Id de la factura" />
+      <TextField fx:id="tfHora" layoutX="55.0" layoutY="653.0" />
+      <ComboBox fx:id="cmbCliente" layoutX="54.0" layoutY="375.0" prefWidth="150.0" />
+      <ComboBox fx:id="cmbEmpleado" layoutX="61.0" layoutY="508.0" prefWidth="150.0" />
+      <TextField fx:id="tfTotal" layoutX="648.0" layoutY="123.0" promptText="TOTAL" />
+      <TableView fx:id="tblFacturas" layoutX="349.0" layoutY="317.0" onMouseClicked="#cargarDatosEditar" prefHeight="292.0" prefWidth="648.0">
         <columns>
           <TableColumn fx:id="colFacturaId" prefWidth="75.0" text="facturaId" />
-          <TableColumn fx:id="colFecha" prefWidth="123.20001220703125" text="fecha" />
-            <TableColumn fx:id="colHora" prefWidth="88.00003051757812" text="hora" />
-            <TableColumn fx:id="colTotal" prefWidth="108.79998779296875" text="total" />
-            <TableColumn fx:id="colCliente" prefWidth="126.39996337890625" text="cliente" />
-            <TableColumn fx:id="colEmpleado" prefWidth="191.20001220703125" text="empleado" />
+          <TableColumn fx:id="colFecha" prefWidth="99.0" text="fecha" />
+            <TableColumn fx:id="colHora" prefWidth="94.0" text="hora" />
+            <TableColumn fx:id="colTotal" prefWidth="103.0" text="total" />
+            <TableColumn fx:id="colCliente" prefWidth="122.0" text="cliente" />
+            <TableColumn fx:id="colEmpleado" prefWidth="77.0" text="empleado" />
+            <TableColumn fx:id="colProducto" prefWidth="77.0" text="producto" />
         </columns>
       </TableView>
-      <Button fx:id="btnVaciar" layoutX="1049.0" layoutY="373.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: grey;" text="Vaciar" textFill="WHITE">
+      <Button fx:id="btnVaciar" layoutX="1056.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: gray;" text="Vaciar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button fx:id="btnGuardar" layoutX="1049.0" layoutY="193.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: green;" text="Guardar" textFill="WHITE">
+      <Button fx:id="btnGuardar" layoutX="1056.0" layoutY="220.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: green;" text="Guardar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button fx:id="btnRegresar" layoutX="1049.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: green;" text="Regresar" textFill="WHITE">
+      <Button fx:id="btnRegresar" layoutX="1056.0" layoutY="498.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: green;" text="Regresar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button fx:id="btnEliminar" layoutX="1049.0" layoutY="285.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: red;" text="Eliminar" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font></Button>
-      <TextField fx:id="tfFecha" layoutX="359.0" layoutY="247.0" prefHeight="35.0" prefWidth="190.0" />
-      <Button fx:id="btnTotal" layoutX="1049.0" layoutY="472.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: blue;" text="Total" textFill="WHITE">
+      <TextField fx:id="tfFecha" layoutX="391.0" layoutY="250.0" />
+      <ComboBox fx:id="cmbProducto" layoutX="836.0" layoutY="201.0" prefWidth="150.0" promptText="Productos" />
+      <Button fx:id="btnVerFactura" layoutX="1056.0" layoutY="403.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="90.0" style="-fx-background-color: blue;" text="Ver Factura" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>

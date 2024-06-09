@@ -27,6 +27,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.cristianrosas.dao.Conexion;
 import org.cristianrosas.dto.ClienteDTO;
 import org.cristianrosas.model.Cliente;
+import org.cristianrosas.report.GenerarReporte;
 import org.cristianrosas.system.Main;
 import org.cristianrosas.utils.SuperKinalAlert;
 
@@ -49,7 +50,7 @@ public class MenuClientesController implements Initializable {
     TableColumn colClienteId, colNombre, colApellido, colTelefono, colDireccion, colNIT;
         
     @FXML
-    Button btnAgregar, btnEditar, btnRegresar, btnEliminar, btnBuscar;
+    Button btnAgregar, btnEditar, btnRegresar, btnEliminar, btnBuscar, btnVerClientes;
     
     @FXML
     TextField tfClienteId;
@@ -213,6 +214,7 @@ public class MenuClientesController implements Initializable {
                 colDireccion.setCellValueFactory(new PropertyValueFactory<Cliente, String>("direccion"));
                 colNIT.setCellValueFactory(new PropertyValueFactory<Cliente, String>("NIT"));
             }
+        }else if(event.getSource() == btnVerClientes){
         }
     }   
 } 
